@@ -22,25 +22,7 @@ The result is a system that stays locked on one specific person through movement
 
 ## Architecture
 
-```
-                          ┌─────────────────────────┐
-   Video / Webcam ───────▶│   YOLOv8n person track   │──▶ tracked people (bbox + track_id)
-                          └─────────────────────────┘
-                                       │
-                    ┌──────────────────┴───────────────────┐
-                    ▼                                       ▼
-        ┌───────────────────────┐             ┌───────────────────────────┐
-        │  Face recognition     │             │  Locked-target follower    │
-        │  (dlib / face_recog)  │             │  • match track_id           │
-        │  → acquire the lock   │             │  • appearance histogram     │
-        └───────────────────────┘             │  • motion prediction        │
-                    │                          │  • re-association scoring    │
-                    └───── IoU match ─────────▶│  → keep following target     │
-                                               └───────────────────────────┘
-                                                           │
-                                                           ▼
-                                            Annotated frame + JSON metrics
-```
+![HRTV architecture](docs/architecture.svg)
 
 ### The three stages in detail
 
@@ -253,4 +235,4 @@ This vision pipeline is the first milestone toward an autonomous person-followin
 
 ## License
 
-Add your license of choice (e.g. MIT) here before publishing.
+This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0), consistent with its Ultralytics YOLOv8 dependency.
