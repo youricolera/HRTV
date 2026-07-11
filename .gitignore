@@ -1,0 +1,28 @@
+# Virtual environment
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Editor
+.vscode/
+
+# Local test scenarios (may contain absolute paths to private videos)
+tests/video_scenarios.json
+
+# Generated outputs
+tests/reports/*_annotated.mp4
+*.mp4
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Personal datasets & face data (do not publish photos of the target)
+dataset/
+dataset_faces/
+*.pkl

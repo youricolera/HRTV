@@ -1,0 +1,21 @@
+{
+  "video_path": "C:\\Users\\youri\\Videos\\2026-01-11 14-41-44.mp4",
+  "device": "cpu",
+  "frames_processed": 618,
+  "frames_with_people": 618,
+  "frames_locked": 618,
+  "frames_target_visible": 618,
+  "lock_acquired": true,
+  "lock_frame": 1,
+  "initial_target_track_id": 1,
+  "final_target_track_id": 1,
+  "times_lock_acquired": 1,
+  "times_lock_lost": 0,
+  "max_consecutive_lost_frames": 0,
+  "occlusion_frames": 0,
+  "reassociation_successes": 0,
+  "target_present_at_end": true,
+  "ended_locked": true,
+  "lock_ratio": 1.0,
+  "target_visibility_ratio": 1.0
+}

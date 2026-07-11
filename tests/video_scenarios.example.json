@@ -1,0 +1,32 @@
+{
+  "scenarios": [
+    {
+      "name": "static_youri_front_webcam",
+      "video": "../videos_tests/youri_static.mp4",
+      "annotated_output": "../videos_tests/reports/youri_static_annotated.mp4",
+      "thresholds": {
+        "lock_acquired": true,
+        "max_lock_frame": 15,
+        "min_lock_ratio": 0.95,
+        "max_times_lock_lost": 0,
+        "max_consecutive_lost_frames": 1,
+        "require_ended_locked": true,
+        "require_target_present_at_end": true
+      }
+    },
+    {
+      "name": "crossing_people_follow_youri",
+      "video": "../videos_tests/youri_crossing_people.mp4",
+      "annotated_output": "../videos_tests/reports/youri_crossing_people_annotated.mp4",
+      "thresholds": {
+        "lock_acquired": true,
+        "max_lock_frame": 20,
+        "min_lock_ratio": 0.8,
+        "min_target_visibility_ratio": 0.7,
+        "max_times_lock_lost": 1,
+        "max_consecutive_lost_frames": 8,
+        "require_ended_locked": true
+      }
+    }
+  ]
+}
