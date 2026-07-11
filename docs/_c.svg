@@ -28,47 +28,44 @@
     .els{ font-size: 11.5px; font-weight: 400; }
   </style>
 
-  <text x="48" y="52" class="h">HRTV &#8212; tracking state cycle</text>
+  <text x="48" y="52" class="h">HRTV — tracking state cycle</text>
   <text x="48" y="76" class="sub" fill="#8b949e">One target, three states. The system loops between them for every frame.</text>
 
+  <!-- ============ SEARCHING (green) ============ -->
   <rect x="70" y="150" width="250" height="150" rx="16" fill="#0e2a17" stroke="#3fb950" stroke-width="2"/>
-  <text x="92" y="184" class="tag" fill="#3fb950">STATE 1 &#183; UNLOCKED</text>
+  <text x="92" y="184" class="tag" fill="#3fb950">STATE 1 · UNLOCKED</text>
   <text x="92" y="212" class="st" fill="#7ee787">SEARCHING</text>
   <text x="92" y="240" class="sub" fill="#c9d1d9">Face recognition (dlib)</text>
   <text x="92" y="261" class="sub" fill="#8b949e">scans every person for the</text>
   <text x="92" y="279" class="sub" fill="#8b949e">known face encodings</text>
 
+  <!-- ============ LOCKED (blue) ============ -->
   <rect x="640" y="150" width="250" height="150" rx="16" fill="#0d2440" stroke="#2f81f7" stroke-width="2"/>
-  <text x="662" y="184" class="tag" fill="#2f81f7">STATE 2 &#183; LOCKED</text>
+  <text x="662" y="184" class="tag" fill="#2f81f7">STATE 2 · LOCKED</text>
   <text x="662" y="212" class="st" fill="#9ecbff">TRACKING</text>
   <text x="662" y="240" class="sub" fill="#c9d1d9">Follows the YOLOv8n</text>
   <text x="662" y="261" class="sub" fill="#c9d1d9">persistent track_id</text>
   <text x="662" y="279" class="sub" fill="#8b949e">face no longer needed</text>
 
+  <!-- ============ REASSOCIATING (amber) ============ -->
   <rect x="355" y="420" width="250" height="160" rx="16" fill="#33240a" stroke="#d29922" stroke-width="2"/>
-  <text x="377" y="454" class="tag" fill="#d29922">STATE 3 &#183; KEEP-LOCK</text>
+  <text x="377" y="454" class="tag" fill="#d29922">STATE 3 · KEEP-LOCK</text>
   <text x="377" y="482" class="st" fill="#e3b341">REASSOCIATING</text>
   <text x="377" y="509" class="sub" fill="#c9d1d9">appearance histogram +</text>
   <text x="377" y="527" class="sub" fill="#c9d1d9">motion prediction + IoU</text>
   <text x="377" y="545" class="sub" fill="#8b949e">recover the target through</text>
   <text x="377" y="563" class="sub" fill="#8b949e">crossings &amp; occlusions</text>
 
+  <!-- ============ TRANSITIONS ============ -->
+
+  <!-- SEARCHING -> LOCKED (face match) -->
   <path d="M320 205 L634 205" fill="none" stroke="#3fb950" stroke-width="2.5" marker-end="url(#a-green)"/>
   <text x="477" y="192" text-anchor="middle" class="el" fill="#3fb950">face recognized</text>
-  <text x="477" y="228" text-anchor="middle" class="els" fill="#8b949e">matched to a person box by IoU &#8594; lock</text>
+  <text x="477" y="228" text-anchor="middle" class="els" fill="#8b949e">matched to a person box by IoU → lock</text>
 
+  <!-- LOCKED -> REASSOCIATING (occlusion / temp loss) -->
   <path d="M690 300 C 660 380, 610 410, 578 416" fill="none" stroke="#d29922" stroke-width="2.5" marker-end="url(#a-amber)"/>
-  <text x="608" y="372" text-anchor="end" class="el" fill="#e3b341">target ID lost</text>
-  <text x="608" y="390" text-anchor="end" class="els" fill="#8b949e">occlusion or crossing</text>
+  <text x="648" y="366" class="el" fill="#d29922">target ID lost</text>
+  <text x="648" y="384" class="els" fill="#8b949e">occlusion or crossing</text>
 
-  <path d="M605 470 C 700 440, 730 360, 738 306" fill="none" stroke="#2f81f7" stroke-width="2.5" marker-end="url(#a-blue)"/>
-  <text x="742" y="430" class="el" fill="#2f81f7">recovered</text>
-  <text x="742" y="448" class="els" fill="#8b949e">re-lock same person</text>
-
-  <path d="M355 490 C 240 470, 175 380, 172 306" fill="none" stroke="#f85149" stroke-width="2.5" marker-end="url(#a-red)"/>
-  <text x="120" y="430" class="el" fill="#f85149">lost too long</text>
-  <text x="120" y="448" class="els" fill="#8b949e">&gt; 5 frames &#8594; unlock,</text>
-  <text x="120" y="466" class="els" fill="#8b949e">restart recognition</text>
-
-  <text x="48" y="618" class="sub" fill="#8b949e">Input: video / webcam frames.   Output each frame: annotated frame + JSON metrics (lock ratio, times lost, reassociations).</text>
-</svg>
+  <!-- REASSOCIATI
