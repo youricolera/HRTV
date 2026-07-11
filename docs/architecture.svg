@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 560" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif" role="img" aria-labelledby="title desc">
+  <title id="title">HRTV architecture</title>
+  <desc id="desc">Pipeline: video feed goes to YOLOv8n tracking, feeding both face-recognition lock acquisition and the locked-target follower, which outputs annotated frames and JSON metrics.</desc>
+
+  <rect x="0" y="0" width="940" height="560" rx="16" fill="#0d1117"/>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7d8590"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2f81f7"/>
+    </marker>
+  </defs>
+
+  <style>
+    .lbl { fill: #e6edf3; font-size: 16px; font-weight: 500; }
+    .sub { font-size: 12.5px; font-weight: 400; }
+    .flow { stroke: #7d8590; stroke-width: 2; fill: none; }
+    .flow-blue { stroke: #2f81f7; stroke-width: 2; fill: none; }
+    .edgelbl { font-size: 12px; font-weight: 400; }
+    .stage { fill: #7d8590; font-size: 12px; font-weight: 500; letter-spacing: .06em; }
+  </style>
+
+  <rect x="30" y="240" width="150" height="72" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="105" y="270" text-anchor="middle" class="lbl">Video / Webcam</text>
+  <text x="105" y="291" text-anchor="middle" class="sub" fill="#8b949e">input stream</text>
+
+  <rect x="250" y="238" width="180" height="76" rx="12" fill="#132a4a" stroke="#2f81f7" stroke-width="1.6"/>
+  <text x="340" y="262" text-anchor="middle" class="stage">STAGE 1</text>
+  <text x="340" y="284" text-anchor="middle" class="lbl">YOLOv8n tracking</text>
+  <text x="340" y="303" text-anchor="middle" class="sub" fill="#9ecbff">persons + track_id</text>
+
+  <rect x="510" y="90" width="220" height="96" rx="12" fill="#161b22" stroke="#3fb950" stroke-width="1.6"/>
+  <text x="620" y="116" text-anchor="middle" class="stage">STAGE 2</text>
+  <text x="620" y="139" text-anchor="middle" class="lbl">Face recognition</text>
+  <text x="620" y="159" text-anchor="middle" class="sub" fill="#7ee787">dlib / face_recognition</text>
+  <text x="620" y="176" text-anchor="middle" class="sub" fill="#8b949e">acquires the lock</text>
+
+  <rect x="510" y="330" width="360" height="150" rx="12" fill="#161b22" stroke="#d29922" stroke-width="1.6"/>
+  <text x="690" y="356" text-anchor="middle" class="stage">STAGE 3</text>
+  <text x="690" y="379" text-anchor="middle" class="lbl">Locked-target follower</text>
+  <line x1="530" y1="392" x2="850" y2="392" stroke="#30363d" stroke-width="1"/>
+  <text x="532" y="414" class="sub" fill="#e3b341">&#8226;  match persistent track_id</text>
+  <text x="532" y="434" class="sub" fill="#e3b341">&#8226;  upper-body appearance histogram</text>
+  <text x="532" y="454" class="sub" fill="#e3b341">&#8226;  motion prediction</text>
+  <text x="532" y="474" class="sub" fill="#e3b341">&#8226;  re-association scoring + margin</text>
+
+  <rect x="250" y="470" width="200" height="72" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="350" y="500" text-anchor="middle" class="lbl">Annotated frame</text>
+  <text x="350" y="522" text-anchor="middle" class="sub" fill="#8b949e">+ JSON metrics</text>
+
+  <path d="M180 276 L244 276" class="flow" marker-end="url(#arrow)"/>
+  <path d="M400 250 C 460 200, 470 160, 504 145" class="flow" marker-end="url(#arrow)"/>
+  <path d="M400 300 C 460 340, 470 380, 504 400" class="flow" marker-end="url(#arrow)"/>
+  <path d="M620 186 C 620 258, 690 276, 690 328" class="flow-blue" marker-end="url(#arrow-blue)"/>
+  <text x="702" y="258" class="edgelbl" fill="#2f81f7">IoU match &#8594; lock</text>
+  <path d="M510 470 C 430 460, 400 500, 452 506" class="flow" marker-end="url(#arrow)"/>
+
+  <g transform="translate(30,470)">
+    <rect x="0" y="0" width="14" height="14" rx="3" fill="#132a4a" stroke="#2f81f7"/>
+    <text x="20" y="12" class="edgelbl" fill="#8b949e">detection &amp; tracking</text>
+    <rect x="0" y="24" width="14" height="14" rx="3" fill="#161b22" stroke="#3fb950"/>
+    <text x="20" y="36" class="edgelbl" fill="#8b949e">acquisition</text>
+    <rect x="0" y="48" width="14" height="14" rx="3" fill="#161b22" stroke="#d29922"/>
+    <text x="20" y="60" class="edgelbl" fill="#8b949e">following &amp; re-id</text>
+  </g>
+</svg>
