@@ -1,4 +1,4 @@
-# Lock & Track — Face-Locked Person Following
+# HRTV — Human Recognition & Tracking Video
 
 A real-time computer vision pipeline that **identifies a specific person by face, then locks onto and follows them** across a video stream — even when their face is no longer visible, when they turn around, or when they cross paths with other people.
 
@@ -102,7 +102,7 @@ Requires **Python 3.10**.
 ```bash
 # Clone
 git clone <your-repo-url>
-cd human_detection_video
+cd HRTV
 
 # Create a virtual environment
 python -m venv venv
